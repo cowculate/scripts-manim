@@ -63,24 +63,14 @@ class Newton_R(Scene):
             vertline = axes.get_vertical_line(point, line_config={"dashed_ratio": 0.85}, color =GRAY_D)
 
             self.play(Create(vertline), run_time = 1)
-            self.wait()
             point = axes.coords_to_point(x_o, y_o)
             dot1 = Dot(point, color = '#ff0000', radius = 0.05)
             self.play(Create(dot1), run_time = 1)
             
-            self.wait()
             line = axes.plot(g, x_range = [-axtick_ref*2, axtick_ref*2, (2*2*axtick_ref)/2], use_smoothing=True, color = LIGHT_GRAY)
             self.play(Create(line), run_time = 1)
             self.wait()
-            fade = FadeOut(vertline)
-            fadeline = FadeOut(line)
-            fadept = FadeOut(dot1)
-            self.play(fade)
-            self.wait()
-            self.play(fadeline)
-            self.wait()
-            self.play(fadept)
-            self.wait()
+            self.play(FadeOut(dot1,vertline, line))
 
 def func(x):
     return x**3+x**2
